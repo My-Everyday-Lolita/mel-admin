@@ -1,0 +1,32 @@
+{
+  "APP": {
+    "TOASTS": {
+      "ERRORS": {
+        "SIGNED_IN": "You must be signed in to access this site.",
+        "ACCESS_DENIED": "You don't have required permission to access this page"
+      }
+    },
+    "LINKS": {
+      "RESOURCES": {
+        "BRANDS": "Brands",
+        "CATEGORIES": "Categories",
+        "COLORS": "Colors",
+        "FEATURES": "Features",
+        "ITEMS": "Items"
+      }
+    }
+  },
+  "SIGN_IN": {
+    "TITLE": "You must be signed in to access this site",
+    "SUBMIT": "Sign In",
+    "FIELDS": {
+      "LABELS": {
+        "USERNAME": "Username",
+        "PASSWORD": "Password"
+      }
+    },
+    "TOASTS": {
+      "UNKNOWN": "An unknown error has occured."
+    }
+  }
+}

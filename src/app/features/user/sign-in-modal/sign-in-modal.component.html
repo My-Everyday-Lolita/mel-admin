@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>{{ 'SIGN_IN.TITLE' | translate }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()" fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'SIGN_IN.FIELDS.LABELS.USERNAME' | translate }} *</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'SIGN_IN.FIELDS.LABELS.PASSWORD' | translate }} *</mat-label>
+      <input type="password" matInput formControlName="password">
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary">
+      {{ 'SIGN_IN.SUBMIT' | translate }}
+      <mat-icon>login</mat-icon>
+    </button>
+  </form>
+</mat-dialog-content>

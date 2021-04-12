@@ -1,0 +1,17 @@
+mat-card {
+  padding: 0 16px 16px 16px;
+
+  mat-toolbar {
+    margin: 0 -16px 16px -16px;
+    width: calc(100% + 32px);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+}
+
+.stat-number {
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
