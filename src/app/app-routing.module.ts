@@ -45,7 +45,7 @@ const resources: Routes = [
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [SignedInGuard] },
   {
-    path: 'resources', children: [
+    path: 'resources', canActivate: [SignedInGuard], children: [
       ...resources
     ]
   }

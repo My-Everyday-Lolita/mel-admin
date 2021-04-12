@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="16px">
+<div fxLayout="row" fxLayoutAlign="center stretch" fxLayoutGap="16px">
   <mat-card>
     <mat-toolbar color="primary" fxLayout="row" fxLayoutGap="16px">
       <mat-icon>card_membership</mat-icon>
@@ -8,12 +8,11 @@
       </a>
     </mat-toolbar>
     <mat-card-content>
-      <span class="stat-number">200</span>
       <ngx-charts-pie-chart [view]="[700, 400]" [scheme]="{ domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] }" [results]="single">
       </ngx-charts-pie-chart>
     </mat-card-content>
   </mat-card>
-  <!--<mat-card>
+  <mat-card>
     <mat-toolbar color="primary" fxLayout="row" fxLayoutGap="16px">
       <mat-icon>category</mat-icon>
       <span class="toolbar-title">Categories</span>
@@ -25,7 +24,7 @@
       <span class="stat-number">60k</span>
     </mat-card-content>
   </mat-card>
-  <mat-card>
+  <!--<mat-card>
     <mat-toolbar color="primary" fxLayout="row" fxLayoutGap="16px">
       <mat-icon>palette</mat-icon>
       <span class="toolbar-title">Colors</span>

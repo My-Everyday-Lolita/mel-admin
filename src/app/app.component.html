@@ -14,6 +14,10 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav [mode]="sidenavMode" [opened]="sidenavOpened" [fixedInViewport]="sidenavFixedInViewport">
     <mat-nav-list>
+      <a routerLink="/" mat-list-item>
+        <mat-icon mat-list-icon>home</mat-icon>
+        <span mat-line>{{ 'APP.LINKS.HOME' | translate }}</span>
+      </a>
       <h2 matSubheader>Resources</h2>
       <a mat-list-item *ngFor="let route of resourcesRoutes" [routerLink]="['resources', route.path]">
         <mat-icon mat-list-icon>{{ route.data && route.data.icon }}</mat-icon>
