@@ -1,8 +1,8 @@
 {
-  "name": "mel-admin",
-  "short_name": "mel-admin",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "MEL Admin",
+  "short_name": "MEL Admin",
+  "theme_color": "#f06292",
+  "background_color": "#f06292",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
