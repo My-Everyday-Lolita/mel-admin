@@ -21,6 +21,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 import { LayoutModule } from '@angular/cdk/layout';
 
@@ -29,6 +31,7 @@ import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from './pages/home/home.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { from, Observable } from 'rxjs';
 import { ToastrModule } from 'ngx-toastr';
@@ -42,6 +45,8 @@ import { ResourcesCategoriesComponent } from './pages/resources-categories/resou
 import { ResourcesColorsComponent } from './pages/resources-colors/resources-colors.component';
 import { ResourcesFeaturesComponent } from './pages/resources-features/resources-features.component';
 import { ResourcesItemsComponent } from './pages/resources-items/resources-items.component';
+import { MelSharedModule, MEL_SIGN_OUT_BEHAVIOR, SignOutBehaviors } from '@my-everyday-lolita/mel-shared';
+import { ConfirmDeleteComponent } from './features/form/confirm-delete/confirm-delete.component';
 
 export class WebpackTranslateLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<any> {
@@ -59,6 +64,7 @@ export class WebpackTranslateLoader implements TranslateLoader {
     ResourcesColorsComponent,
     ResourcesFeaturesComponent,
     ResourcesItemsComponent,
+    ConfirmDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +93,8 @@ export class WebpackTranslateLoader implements TranslateLoader {
     LayoutModule,
     FlexLayoutModule,
     MatCardModule,
+    MatTableModule,
+    MatSortModule,
     NgxChartsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
@@ -106,8 +114,13 @@ export class WebpackTranslateLoader implements TranslateLoader {
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    MelSharedModule.forRoot(environment as any),
+    NgScrollbarModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: MEL_SIGN_OUT_BEHAVIOR, useValue: SignOutBehaviors.NOTHING },
+  ],
+  bootstrap: [AppComponent],
+  exports: [ConfirmDeleteComponent]
 })
 export class AppModule { }

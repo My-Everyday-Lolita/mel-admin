@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ROLES, UserService, UserSignInService } from '@my-everyday-lolita/mel-shared';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { UserSignInService } from '../user-sign-in.service';
-import { ROLES } from '../user.model';
-import { UserService } from '../user.service';
 
 @Component({
   templateUrl: './sign-in-modal.component.html',

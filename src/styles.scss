@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import "~ngx-toastr/toastr";
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
@@ -30,12 +31,15 @@ $mel-admin-theme: mat-light-theme(
   )
 );
 
+$theme-color: mat-get-color-config($mel-admin-theme);
+$background: map.get($theme-color, background);
+
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($mel-admin-theme);
 
-/* You can add global styles to this file, and also import other style files */
+@import "./styles/form";
 
 html,
 body {
@@ -48,4 +52,10 @@ body {
 
 .toolbar-title {
   flex: 1;
+}
+
+:root {
+  --primary: #{map.get($mel-admin-primary, default)};
+  --primary-light: #{map.get($mel-admin-primary, 100)};
+  --table-bg: #{map.get($background, "card")};
 }

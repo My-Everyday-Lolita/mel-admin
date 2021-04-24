@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Delete</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <p mat-dialog-content>
+    Do you really want to delete this resource?<br>
+    This action is <b>definitive</b>, <b>cannot be undone</b> and will impact <b>every users</b>.<br>
+    To delete the item copy paste the identifier in the field below:<br> <b>{{data.token}}</b>
+  </p>
+  <mat-form-field appearance="outline">
+    <mat-label>Identifier *</mat-label>
+    <input type="text" matInput formControlName="id">
+  </mat-form-field>
+  <mat-dialog-actions>
+    <button type="button" mat-button mat-dialog-close>Cancel</button>
+    <button type="submit" mat-raised-button color="warn" [disabled]="form.invalid">Delete</button>
+  </mat-dialog-actions>
+</form>

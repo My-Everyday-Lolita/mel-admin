@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ResourcesBrandsResolver, ResourcesCategoriesResolver, ResourcesColorsResolver } from '@my-everyday-lolita/mel-shared';
 import { RESOURCES_ROUTES } from './app.token';
 import { SignedInGuard } from './features/user/signed-in.guard';
 import { HomeComponent } from './pages/home/home.component';
@@ -13,19 +14,29 @@ const resources: Routes = [
   {
     path: 'brands', component: ResourcesBrandsComponent, data: {
       linkLabel: 'APP.LINKS.RESOURCES.BRANDS',
-      icon: 'card_membership'
-    }
+      icon: 'card_membership',
+      animation: 'brands',
+    },
+    resolve: {
+      brands: ResourcesBrandsResolver
+    },
   },
   {
     path: 'categories', component: ResourcesCategoriesComponent, data: {
       linkLabel: 'APP.LINKS.RESOURCES.CATEGORIES',
       icon: 'category'
+    },
+    resolve: {
+      categories: ResourcesCategoriesResolver
     }
   },
   {
     path: 'colors', component: ResourcesColorsComponent, data: {
       linkLabel: 'APP.LINKS.RESOURCES.COLORS',
       icon: 'palette'
+    },
+    resolve: {
+      colors: ResourcesColorsResolver
     }
   },
   {
@@ -43,7 +54,7 @@ const resources: Routes = [
 ];
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [SignedInGuard] },
+  { path: '', component: HomeComponent, canActivate: [SignedInGuard], data: { animation: 'home' } },
   {
     path: 'resources', canActivate: [SignedInGuard], children: [
       ...resources

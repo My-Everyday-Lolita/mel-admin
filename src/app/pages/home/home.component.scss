@@ -1,11 +1,18 @@
 mat-card {
   padding: 0 16px 16px 16px;
+  overflow: hidden;
 
   mat-toolbar {
     margin: 0 -16px 16px -16px;
     width: calc(100% + 32px);
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+  }
+
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -14,4 +21,11 @@ mat-card {
   font-weight: bold;
   display: flex;
   justify-content: center;
+}
+
+.grid {
+  @media (min-width: 1920px) {
+    width: 60vw;
+    margin: auto;
+  }
 }

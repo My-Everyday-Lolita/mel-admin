@@ -1,0 +1,26 @@
+:host {
+  width: 100%;
+  display: block;
+}
+
+.color-preview {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: block;
+  border: 1px solid #424242;
+}
+
+.mat-column-hex {
+  flex: 0 0 100px;
+  justify-content: center;
+
+  @media screen and (max-width: 599px) {
+    flex: 0 0 60px;
+  }
+}
+
+.mat-column-nbItems {
+  flex: 0 0 100px;
+  justify-content: center;
+}

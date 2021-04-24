@@ -1,18 +1,46 @@
-<div fxLayout="row" fxLayoutAlign="center stretch" fxLayoutGap="16px">
+<!--<div fxLayout="row wrap" fxLayoutAlign="center stretch" fxLayoutGap="16px">-->
+<div class="grid" [gdColumns]="gridColumns" gdRows="auto" gdGap="16px" gdAlignColumns="center center">
+  <mat-card>
+    <mat-toolbar color="primary" fxLayout="row" fxLayoutGap="16px">
+      <mat-icon>checkroom</mat-icon>
+      <span class="toolbar-title">Items</span>
+    </mat-toolbar>
+    <mat-card-content>
+      <ngx-charts-number-card [view]="view" [scheme]="totalItemsScheme" [results]="totalItemsStats" cardColor="#fff">
+      </ngx-charts-number-card>
+    </mat-card-content>
+  </mat-card>
   <mat-card>
     <mat-toolbar color="primary" fxLayout="row" fxLayoutGap="16px">
       <mat-icon>card_membership</mat-icon>
       <span class="toolbar-title">Brands</span>
-      <a mat-icon-button>
-        <mat-icon>chevron_right</mat-icon>
-      </a>
     </mat-toolbar>
     <mat-card-content>
-      <ngx-charts-pie-chart [view]="[700, 400]" [scheme]="{ domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] }" [results]="single">
+      <ngx-charts-pie-chart [view]="view" [scheme]="brandScheme" [results]="brandStats" [labels]="true" [doughnut]="false" [maxLabelLength]="20" [trimLabels]="true">
       </ngx-charts-pie-chart>
     </mat-card-content>
   </mat-card>
   <mat-card>
+    <mat-toolbar color="primary" fxLayout="row" fxLayoutGap="16px">
+      <mat-icon>category</mat-icon>
+      <span class="toolbar-title">Categories</span>
+    </mat-toolbar>
+    <mat-card-content>
+      <ngx-charts-pie-chart [view]="view" [scheme]="categoryScheme" [results]="categoryStats" [labels]="true" [doughnut]="false" [maxLabelLength]="20" [trimLabels]="true">
+      </ngx-charts-pie-chart>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-toolbar color="primary" fxLayout="row" fxLayoutGap="16px">
+      <mat-icon>palette</mat-icon>
+      <span class="toolbar-title">Colors</span>
+    </mat-toolbar>
+    <mat-card-content>
+      <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="colorStats" [labels]="true" [doughnut]="false" [maxLabelLength]="20" [trimLabels]="true">
+      </ngx-charts-pie-chart>
+    </mat-card-content>
+  </mat-card>
+  <!--<mat-card>
     <mat-toolbar color="primary" fxLayout="row" fxLayoutGap="16px">
       <mat-icon>category</mat-icon>
       <span class="toolbar-title">Categories</span>
@@ -24,7 +52,7 @@
       <span class="stat-number">60k</span>
     </mat-card-content>
   </mat-card>
-  <!--<mat-card>
+  <mat-card>
     <mat-toolbar color="primary" fxLayout="row" fxLayoutGap="16px">
       <mat-icon>palette</mat-icon>
       <span class="toolbar-title">Colors</span>

@@ -151,6 +151,46 @@
           }
         }
       }
+    },
+    "mel-shared": {
+      "projectType": "library",
+      "root": "projects/mel-shared",
+      "sourceRoot": "projects/mel-shared/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/mel-shared/tsconfig.lib.json",
+            "project": "projects/mel-shared/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/mel-shared/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mel-shared/src/test.ts",
+            "tsConfig": "projects/mel-shared/tsconfig.spec.json",
+            "karmaConfig": "projects/mel-shared/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mel-shared/tsconfig.lib.json",
+              "projects/mel-shared/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "mel-admin"

@@ -1,0 +1,55 @@
+$radius: 8px;
+
+:host {
+  width: 100%;
+  display: block;
+}
+
+.table-container {
+  width: inherit;
+  border-radius: $radius;
+
+  @media (min-width: 1367px) {
+    width: 60vw;
+    margin: auto;
+  }
+}
+
+mat-table {
+  width: inherit;
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+mat-header-row {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+mat-paginator {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  border-bottom-left-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+mat-header-row,
+mat-row {
+  justify-content: space-between;
+}
+
+mat-header-cell:last-of-type,
+mat-cell:last-of-type {
+  flex: 0 1 100px;
+}
+
+.new-item {
+  margin-left: 16px;
+}
+
+mat-header-cell {
+  mat-icon {
+    margin-right: 16px;
+  }
+}

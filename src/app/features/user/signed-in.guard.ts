@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ROLES, UserService, UserSignInService } from '@my-everyday-lolita/mel-shared';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { SignInModalComponent } from './sign-in-modal/sign-in-modal.component';
-import { UserSignInService } from './user-sign-in.service';
-import { ROLES } from './user.model';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'

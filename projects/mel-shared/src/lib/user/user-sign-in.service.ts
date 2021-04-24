@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { MelSharedModuleConfig, SignOutBehaviors } from '../mel-shared.model';
+import { MEL_ENV, MEL_SIGN_OUT_BEHAVIOR } from '../mel-shared.token';
 import { UserSignInDto, UserSignInInfos, UserSignInResponse } from './user.model';
 
 @Injectable({
@@ -15,15 +16,18 @@ export class UserSignInService {
 
   private readonly STORAGE_KEY = 'mel-usii';
   private signInInfos?: UserSignInInfos;
-  private url = `${environment.domains.login}/auth/realms/${environment.api.auth.realm}/protocol/openid-connect/token`;
+  private url: string;
   private signedIn: BehaviorSubject<boolean>;
 
   constructor(
+    @Inject(MEL_ENV) private env: MelSharedModuleConfig,
     private http: HttpClient,
     private toastr: ToastrService,
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    @Inject(MEL_SIGN_OUT_BEHAVIOR) private defaultSignOutBehavior: SignOutBehaviors
   ) {
+    this.url = `${this.env.domains.login}/auth/realms/${this.env.api.auth.realm}/protocol/openid-connect/token`;
     const localInfos = localStorage.getItem(this.STORAGE_KEY) || null;
     if (localInfos) {
       this.signInInfos = JSON.parse(localInfos);
@@ -55,9 +59,9 @@ export class UserSignInService {
     const body = new URLSearchParams();
     body.set('username', data.username);
     body.set('password', data.password);
-    body.set('grant_type', environment.api.auth.grant_type);
-    body.set('client_id', environment.api.auth.client_id);
-    body.set('scope', environment.api.auth.scope);
+    body.set('grant_type', this.env.api.auth.grant_type);
+    body.set('client_id', this.env.api.auth.client_id);
+    body.set('scope', this.env.api.auth.scope);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
@@ -89,19 +93,25 @@ export class UserSignInService {
     );
   }
 
-  signOut(): void {
+  signOut(behavior = this.defaultSignOutBehavior): void {
     this.signInInfos = undefined;
     localStorage.removeItem(this.STORAGE_KEY);
     this.signedIn.next(false);
-    if (this.router.routerState.snapshot.url !== '/') {
-      this.router.navigateByUrl('/', { replaceUrl: true });
+    switch (behavior) {
+      case SignOutBehaviors.HOME_REDIRECT:
+        this.router.navigateByUrl('/', { replaceUrl: true });
+        break;
+
+      case SignOutBehaviors.NOTHING:
+      default:
+        break;
     }
   }
 
   refreshToken(): Observable<boolean> {
     if (this.signInInfos && this.signInInfos.refresh_token) {
       const body = new URLSearchParams();
-      body.set('client_id', environment.api.auth.client_id);
+      body.set('client_id', this.env.api.auth.client_id);
       body.set('grant_type', 'refresh_token');
       body.set('refresh_token', this.signInInfos?.refresh_token);
       const options = {
@@ -111,9 +121,17 @@ export class UserSignInService {
         catchError(response => {
           if (response.error.error === 'invalid_grant') {
             this.signOut();
-            this.toastr.error('SIGN_IN.TOASTS.EXPIRED_SESSION', undefined, { closeButton: true, disableTimeOut: true, enableHtml: true });
+            this.translateService.get('SIGN_IN.TOASTS.EXPIRED_SESSION').subscribe({
+              next: translatedString => {
+                this.toastr.error(translatedString, undefined, { closeButton: true, disableTimeOut: true, enableHtml: true });
+              }
+            });
           } else {
-            this.toastr.error('SIGN_IN.TOASTS.UNKNOWN', undefined, { closeButton: true, disableTimeOut: true, enableHtml: true });
+            this.translateService.get('SIGN_IN.TOASTS.UNKNOWN').subscribe({
+              next: translatedString => {
+                this.toastr.error(translatedString, undefined, { closeButton: true, disableTimeOut: true, enableHtml: true });
+              }
+            });
             console.error(response);
           }
           return of(false);

@@ -1,1 +1,83 @@
-<p>resources-colors works!</p>
+<div class="table-container mat-elevation-z8">
+  <ng-scrollbar track="all">
+    <mat-table [dataSource]="pagedItems" *ngIf="pagedItems" multiTemplateDataRows class="responsive">
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-icon class="">palette</mat-icon>
+          <span>Name</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.data.name }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="hex">
+        <mat-header-cell *matHeaderCellDef>
+          <span>Preview</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="color-preview" [ngStyle]="{background: element.data.hex}" aria-hidden="true"></span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nbItems">
+        <mat-header-cell *matHeaderCellDef>
+          <span>Items</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.nbItems || 0 }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <span>Actions</span>
+          <a [routerLink]="['.', 'new']" mat-icon-button aria-label="Create new" class="new-item">
+            <mat-icon>add</mat-icon>
+          </a>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div fxLayout="row" fxLayoutAlign="end">
+            <button mat-icon-button aria-label="Toggle the edit form" (click)="element.expanded = !element.expanded">
+              <mat-icon *ngIf="!element.expanded">edit</mat-icon>
+              <mat-icon *ngIf="element.expanded">clear</mat-icon>
+            </button>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Open the action menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item (click)="delete(element)">
+                <mat-icon color="warn">delete_forever</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="form">
+        <mat-cell *matCellDef="let element" class="full-width">
+          <form [formGroup]="element.form" (ngSubmit)="update(element)" fxFlex="1 0 100%" fxLayout [@expandable]="element.expanded ? 'expanded' : 'collapsed'">
+            <div fxLayout="row" fxFlex="1 0 100%" fxLayoutAlign="start start" fxLayoutGap="16px" fxLayout.xs="column" fxLayoutAlign.xs="center stretch" fxLayoutGap.xs="0px">
+              <mat-form-field appearance="outline">
+                <mat-label>Name *</mat-label>
+                <input type="text" matInput formControlName="name">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>HEX code</mat-label>
+                <input type="text" matInput formControlName="hex">
+              </mat-form-field>
+              <div fxFlex="1 0" fxLayout fxLayoutAlign="end">
+                <button type="submit" mat-raised-button color="primary" [disabled]="element.form.pristine || element.form.invalid">
+                  Update
+                </button>
+              </div>
+            </div>
+          </form>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="next-expandable"></mat-row>
+      <mat-row *matRowDef="let row; columns: ['form'];" class="expandable"></mat-row>
+    </mat-table>
+  </ng-scrollbar>
+  <mat-paginator [length]="resultsLength" [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize"></mat-paginator>
+</div>

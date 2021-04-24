@@ -27,7 +27,9 @@
       }
     },
     "TOASTS": {
-      "UNKNOWN": "An unknown error has occured."
+      "UNKNOWN": "An unknown error has occured.",
+      "EXPIRED_SESSION": "Your session has expired.",
+      "CREDENTIALS_ERROR": "Invalid username or password."
     }
   }
 }

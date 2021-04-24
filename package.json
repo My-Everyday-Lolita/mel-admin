@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "build:mel-shared": "ng build mel-shared",
     "start:local": "ng serve --port=4300 --host=192.168.1.22",
     "build": "ng build",
     "test": "ng test",
@@ -26,6 +27,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@swimlane/ngx-charts": "^17.0.1",
     "jwt-decode": "^3.1.2",
+    "ngx-scrollbar": "^7.5.4",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
@@ -45,6 +47,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "ng-packagr": "^11.0.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
